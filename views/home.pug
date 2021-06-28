@@ -1,0 +1,26 @@
+extends layout.pug 
+
+block main 
+    div.main
+        if success 
+            p Task added succesfully
+        if error
+            p please dont leave it empty
+        form.form(action='/add' method='POST')
+            input.input(type='text' placeholder='Add your action...' name='todo')
+            input.time(type='time' name='time')
+            button.btn ADD
+
+        div.todos
+            if todos.length
+                each todo in todos
+                    div.task 
+                        div.text 
+                            a(href=`/${todo.id}/update`) #{todo.description}
+                        div.time
+                            p #{todo.time}
+                            a(href=`/${todo.id}/delete`) Delete
+                        
+                            
+            else 
+                p.task no data available
